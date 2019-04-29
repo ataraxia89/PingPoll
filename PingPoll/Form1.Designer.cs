@@ -31,12 +31,14 @@
             this.btnStartStop = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.dgvEvents = new System.Windows.Forms.DataGridView();
-            this.txtPingURL = new System.Windows.Forms.TextBox();
-            this.lblPingURL = new System.Windows.Forms.Label();
             this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EventDetails = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtPingURL = new System.Windows.Forms.TextBox();
+            this.lblPingURL = new System.Windows.Forms.Label();
             this.lblCurrentIPTitle = new System.Windows.Forms.Label();
             this.lblCurrentIP = new System.Windows.Forms.Label();
+            this.lblPingInterval = new System.Windows.Forms.Label();
+            this.txtPingInterval = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEvents)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,6 +81,22 @@
             this.dgvEvents.Size = new System.Drawing.Size(613, 372);
             this.dgvEvents.TabIndex = 27;
             // 
+            // Time
+            // 
+            this.Time.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Time.HeaderText = "Time";
+            this.Time.Name = "Time";
+            this.Time.ReadOnly = true;
+            this.Time.Width = 55;
+            // 
+            // EventDetails
+            // 
+            this.EventDetails.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.EventDetails.HeaderText = "Event Details";
+            this.EventDetails.Name = "EventDetails";
+            this.EventDetails.ReadOnly = true;
+            this.EventDetails.Width = 95;
+            // 
             // txtPingURL
             // 
             this.txtPingURL.Location = new System.Drawing.Point(631, 170);
@@ -95,22 +113,6 @@
             this.lblPingURL.TabIndex = 30;
             this.lblPingURL.Text = "Ping URL:";
             this.lblPingURL.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // Time
-            // 
-            this.Time.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Time.HeaderText = "Time";
-            this.Time.Name = "Time";
-            this.Time.ReadOnly = true;
-            this.Time.Width = 55;
-            // 
-            // EventDetails
-            // 
-            this.EventDetails.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.EventDetails.HeaderText = "Event Details";
-            this.EventDetails.Name = "EventDetails";
-            this.EventDetails.ReadOnly = true;
-            this.EventDetails.Width = 95;
             // 
             // lblCurrentIPTitle
             // 
@@ -132,11 +134,30 @@
             this.lblCurrentIP.Text = "[Current IP]";
             this.lblCurrentIP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lblPingInterval
+            // 
+            this.lblPingInterval.Location = new System.Drawing.Point(631, 103);
+            this.lblPingInterval.Name = "lblPingInterval";
+            this.lblPingInterval.Size = new System.Drawing.Size(231, 19);
+            this.lblPingInterval.TabIndex = 34;
+            this.lblPingInterval.Text = "Ping Interval (ms):";
+            this.lblPingInterval.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtPingInterval
+            // 
+            this.txtPingInterval.Location = new System.Drawing.Point(631, 125);
+            this.txtPingInterval.Name = "txtPingInterval";
+            this.txtPingInterval.Size = new System.Drawing.Size(231, 20);
+            this.txtPingInterval.TabIndex = 33;
+            this.txtPingInterval.Text = "500";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(874, 433);
+            this.Controls.Add(this.lblPingInterval);
+            this.Controls.Add(this.txtPingInterval);
             this.Controls.Add(this.lblCurrentIP);
             this.Controls.Add(this.lblCurrentIPTitle);
             this.Controls.Add(this.lblPingURL);
@@ -166,6 +187,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn EventDetails;
         private System.Windows.Forms.Label lblCurrentIPTitle;
         private System.Windows.Forms.Label lblCurrentIP;
+        private System.Windows.Forms.Label lblPingInterval;
+        private System.Windows.Forms.TextBox txtPingInterval;
     }
 }
 

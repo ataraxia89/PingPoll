@@ -17,6 +17,7 @@ namespace PingPoll
         private System.Net.NetworkInformation.Ping ping;
         private System.Net.NetworkInformation.PingReply reply;
         private string currentIP;
+        private int interval;
 
         public Form1()
         {
@@ -24,7 +25,9 @@ namespace PingPoll
 
             ping = new System.Net.NetworkInformation.Ping();
 
-            timer = new System.Timers.Timer(500);
+            interval = 500;
+
+            timer = new System.Timers.Timer(interval);
             timer.Elapsed += Timer_Elapsed;
 
             lblCurrentIP.Text = "";
@@ -81,17 +84,22 @@ namespace PingPoll
 
         private void btnStartStop_Click(object sender, EventArgs e)
         {
+            if (int.TryParse(txtPingInterval.Text, out interval))
+                timer.Interval = interval;
+
             if (timer.Enabled)
             {
                 timer.Enabled = false;
                 btnStartStop.Text = "Start";
                 btnStartStop.BackColor = Color.Green;
+                txtPingInterval.Enabled = true;
                 txtPingURL.Enabled = true;
             }
             else
             {
                 btnStartStop.Text = "Stop";
                 btnStartStop.BackColor = Color.Red;
+                txtPingInterval.Enabled = false;
                 txtPingURL.Enabled = false;
                 timer.Enabled = true;
             }
