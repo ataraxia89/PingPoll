@@ -39,7 +39,12 @@
             this.lblCurrentIP = new System.Windows.Forms.Label();
             this.lblPingInterval = new System.Windows.Forms.Label();
             this.txtPingInterval = new System.Windows.Forms.TextBox();
+            this.dgvOffline = new System.Windows.Forms.DataGridView();
+            this.Offline = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Online = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Duration = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEvents)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOffline)).BeginInit();
             this.SuspendLayout();
             // 
             // btnStartStop
@@ -47,7 +52,7 @@
             this.btnStartStop.BackColor = System.Drawing.Color.Green;
             this.btnStartStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStartStop.ForeColor = System.Drawing.Color.White;
-            this.btnStartStop.Location = new System.Drawing.Point(631, 206);
+            this.btnStartStop.Location = new System.Drawing.Point(557, 206);
             this.btnStartStop.Name = "btnStartStop";
             this.btnStartStop.Size = new System.Drawing.Size(231, 49);
             this.btnStartStop.TabIndex = 25;
@@ -57,7 +62,7 @@
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(466, 390);
+            this.btnClear.Location = new System.Drawing.Point(392, 472);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(159, 27);
             this.btnClear.TabIndex = 19;
@@ -78,7 +83,7 @@
             this.dgvEvents.ReadOnly = true;
             this.dgvEvents.RowHeadersVisible = false;
             this.dgvEvents.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvEvents.Size = new System.Drawing.Size(613, 372);
+            this.dgvEvents.Size = new System.Drawing.Size(539, 243);
             this.dgvEvents.TabIndex = 27;
             // 
             // Time
@@ -99,7 +104,7 @@
             // 
             // txtPingURL
             // 
-            this.txtPingURL.Location = new System.Drawing.Point(631, 170);
+            this.txtPingURL.Location = new System.Drawing.Point(557, 170);
             this.txtPingURL.Name = "txtPingURL";
             this.txtPingURL.Size = new System.Drawing.Size(231, 20);
             this.txtPingURL.TabIndex = 28;
@@ -107,7 +112,7 @@
             // 
             // lblPingURL
             // 
-            this.lblPingURL.Location = new System.Drawing.Point(631, 148);
+            this.lblPingURL.Location = new System.Drawing.Point(557, 148);
             this.lblPingURL.Name = "lblPingURL";
             this.lblPingURL.Size = new System.Drawing.Size(231, 19);
             this.lblPingURL.TabIndex = 30;
@@ -117,7 +122,7 @@
             // lblCurrentIPTitle
             // 
             this.lblCurrentIPTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentIPTitle.Location = new System.Drawing.Point(631, 12);
+            this.lblCurrentIPTitle.Location = new System.Drawing.Point(557, 12);
             this.lblCurrentIPTitle.Name = "lblCurrentIPTitle";
             this.lblCurrentIPTitle.Size = new System.Drawing.Size(231, 31);
             this.lblCurrentIPTitle.TabIndex = 31;
@@ -127,7 +132,7 @@
             // lblCurrentIP
             // 
             this.lblCurrentIP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentIP.Location = new System.Drawing.Point(631, 43);
+            this.lblCurrentIP.Location = new System.Drawing.Point(557, 43);
             this.lblCurrentIP.Name = "lblCurrentIP";
             this.lblCurrentIP.Size = new System.Drawing.Size(231, 31);
             this.lblCurrentIP.TabIndex = 32;
@@ -136,7 +141,7 @@
             // 
             // lblPingInterval
             // 
-            this.lblPingInterval.Location = new System.Drawing.Point(631, 103);
+            this.lblPingInterval.Location = new System.Drawing.Point(557, 103);
             this.lblPingInterval.Name = "lblPingInterval";
             this.lblPingInterval.Size = new System.Drawing.Size(231, 19);
             this.lblPingInterval.TabIndex = 34;
@@ -145,17 +150,57 @@
             // 
             // txtPingInterval
             // 
-            this.txtPingInterval.Location = new System.Drawing.Point(631, 125);
+            this.txtPingInterval.Location = new System.Drawing.Point(557, 125);
             this.txtPingInterval.Name = "txtPingInterval";
             this.txtPingInterval.Size = new System.Drawing.Size(231, 20);
             this.txtPingInterval.TabIndex = 33;
             this.txtPingInterval.Text = "500";
             // 
+            // dgvOffline
+            // 
+            this.dgvOffline.AllowUserToAddRows = false;
+            this.dgvOffline.AllowUserToDeleteRows = false;
+            this.dgvOffline.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvOffline.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Offline,
+            this.Online,
+            this.Duration});
+            this.dgvOffline.Location = new System.Drawing.Point(12, 261);
+            this.dgvOffline.Name = "dgvOffline";
+            this.dgvOffline.ReadOnly = true;
+            this.dgvOffline.RowHeadersVisible = false;
+            this.dgvOffline.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvOffline.Size = new System.Drawing.Size(539, 205);
+            this.dgvOffline.TabIndex = 35;
+            // 
+            // Offline
+            // 
+            this.Offline.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Offline.HeaderText = "Offline";
+            this.Offline.Name = "Offline";
+            this.Offline.ReadOnly = true;
+            this.Offline.Width = 62;
+            // 
+            // Online
+            // 
+            this.Online.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Online.HeaderText = "Online";
+            this.Online.Name = "Online";
+            this.Online.ReadOnly = true;
+            this.Online.Width = 62;
+            // 
+            // Duration
+            // 
+            this.Duration.HeaderText = "Duration";
+            this.Duration.Name = "Duration";
+            this.Duration.ReadOnly = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(874, 433);
+            this.ClientSize = new System.Drawing.Size(795, 508);
+            this.Controls.Add(this.dgvOffline);
             this.Controls.Add(this.lblPingInterval);
             this.Controls.Add(this.txtPingInterval);
             this.Controls.Add(this.lblCurrentIP);
@@ -172,6 +217,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PingPoll";
             ((System.ComponentModel.ISupportInitialize)(this.dgvEvents)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOffline)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -189,6 +235,10 @@
         private System.Windows.Forms.Label lblCurrentIP;
         private System.Windows.Forms.Label lblPingInterval;
         private System.Windows.Forms.TextBox txtPingInterval;
+        private System.Windows.Forms.DataGridView dgvOffline;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Offline;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Online;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Duration;
     }
 }
 

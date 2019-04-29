@@ -15,13 +15,15 @@ namespace PingPoll
     {
         private System.Timers.Timer timer;
         private System.Net.NetworkInformation.Ping ping;
-        private System.Net.NetworkInformation.PingReply reply;
+        private bool pingSuccess;
         private string currentIP;
         private int interval;
         private DateTime requestTime;
         private DateTime responseTime;
         private TimeSpan pingTimeSpan;
         private string responseTimeString;
+        private DateTime? offlineTimestamp;
+        private DateTime onlineTimestamp;
 
         public Form1()
         {
@@ -47,7 +49,10 @@ namespace PingPoll
             try
             {
                 requestTime = DateTime.Now;
-                reply = ping.Send(txtPingURL.Text);
+                pingSuccess = false;
+                try { pingSuccess = ping.Send(txtPingURL.Text).Status == System.Net.NetworkInformation.IPStatus.Success; }
+                catch { }
+
                 responseTime = DateTime.Now;
 
                 pingTimeSpan = responseTime - requestTime;
@@ -59,10 +64,24 @@ namespace PingPoll
                 else
                     responseTimeString = $"response received in {pingTimeSpan.Milliseconds} milliseconds";
 
-                if (reply.Status != System.Net.NetworkInformation.IPStatus.Success)
+                if (!pingSuccess)
+                {
+                    if (offlineTimestamp == null)
+                        offlineTimestamp = DateTime.Now;
+
                     AddEventLog(dgvEvents, "Offline");
+                }
                 else
+                {
+                    if (offlineTimestamp != null)
+                    {
+                        onlineTimestamp = DateTime.Now;
+                        AddOfflineLog(dgvOffline, (DateTime)offlineTimestamp, onlineTimestamp);
+                        offlineTimestamp = null;
+                    }
+
                     AddEventLog(dgvEvents, $"Online ({responseTimeString})");
+                }
             }
             catch (Exception ex)
             {
@@ -133,6 +152,25 @@ namespace PingPoll
                 dgv.ClearSelection();
                 dgv.Rows[dgv.Rows.Count - 1].Selected = true;
                 dgv.FirstDisplayedScrollingRowIndex = dgv.Rows.Count - 1;
+                Update();
+            }
+        }
+
+        private delegate void AddOfflineLogDelegate(DataGridView dgv, DateTime timeOffline, DateTime timeOnline);
+
+        private void AddOfflineLog(DataGridView dgv, DateTime timeOffline, DateTime timeOnline)
+        {
+            if (dgv.InvokeRequired)
+                dgv.Invoke(new AddOfflineLogDelegate(AddOfflineLog), dgv, timeOffline, timeOnline);
+            else
+            {
+                TimeSpan duration = timeOnline - timeOffline;
+                dgv.Rows.Add(timeOffline.ToString("yyyy-MM-dd HH:mm:ss.fff"), timeOnline.ToString("yyyy-MM-dd HH:mm:ss.fff"), $"{(duration.Hours > 0 ? duration.TotalHours : 0).ToString("00")}:{duration.Minutes.ToString("00")}:{duration.Seconds.ToString("00")}.{duration.Milliseconds.ToString("000")}");
+
+                dgv.ClearSelection();
+                dgv.Rows[dgv.Rows.Count - 1].Selected = true;
+                dgv.FirstDisplayedScrollingRowIndex = dgv.Rows.Count - 1;
+                Update();
             }
         }
 
@@ -143,12 +181,16 @@ namespace PingPoll
             if (lbl.InvokeRequired)
                 lbl.Invoke(new UpdateCurrentIPDelegate(UpdateCurrentIP), lbl, newIP);
             else
+            {
                 lbl.Text = newIP;
+                Update();
+            }
         }
 
         private void btnClear_Click(object sender, EventArgs e)
         {
             dgvEvents.Rows.Clear();
+            dgvOffline.Rows.Clear();
         }
     }
 }
