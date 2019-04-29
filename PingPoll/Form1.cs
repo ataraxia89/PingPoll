@@ -13,7 +13,8 @@ namespace PingPoll
 {
     public partial class Form1 : Form
     {
-        private System.Timers.Timer timer;
+        private System.Timers.Timer pingTimer;
+        private System.Timers.Timer ipTimer;
         private System.Net.NetworkInformation.Ping ping;
         private bool pingSuccess;
         private string currentIP;
@@ -33,15 +34,18 @@ namespace PingPoll
 
             interval = 500;
 
-            timer = new System.Timers.Timer(interval);
-            timer.Elapsed += Timer_Elapsed;
+            pingTimer = new System.Timers.Timer(interval);
+            pingTimer.Elapsed += pingTimer_Elapsed;
+
+            ipTimer = new System.Timers.Timer(interval);
+            ipTimer.Elapsed += ipTimer_Elapsed;
 
             lblCurrentIP.Text = "";
         }
 
-        private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        private void pingTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            timer.Enabled = false;
+            pingTimer.Enabled = false;
 
             if (txtPingURL.Text.Contains("http://"))
                 txtPingURL.Text = txtPingURL.Text.Replace("http://", "");
@@ -88,6 +92,13 @@ namespace PingPoll
                 AddEventLog(dgvEvents, $"Error attempting ping: {ex.Message}");
             }
 
+            pingTimer.Enabled = true;
+        }
+
+        private void ipTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            ipTimer.Enabled = false;
+
             try
             {
                 WebRequest req = WebRequest.Create("http://checkip.dyndns.org");
@@ -113,17 +124,21 @@ namespace PingPoll
                 AddEventLog(dgvEvents, $"Error attempting IP check: {ex.Message}");
             }
 
-            timer.Enabled = true;
+            ipTimer.Enabled = true;
         }
 
         private void btnStartStop_Click(object sender, EventArgs e)
         {
             if (int.TryParse(txtPingInterval.Text, out interval))
-                timer.Interval = interval;
-
-            if (timer.Enabled)
             {
-                timer.Enabled = false;
+                pingTimer.Interval = interval;
+                ipTimer.Interval = interval;
+            }
+
+            if (pingTimer.Enabled || ipTimer.Enabled)
+            {
+                pingTimer.Enabled = false;
+                ipTimer.Enabled = false;
                 btnStartStop.Text = "Start";
                 btnStartStop.BackColor = Color.Green;
                 txtPingInterval.Enabled = true;
@@ -135,7 +150,8 @@ namespace PingPoll
                 btnStartStop.BackColor = Color.Red;
                 txtPingInterval.Enabled = false;
                 txtPingURL.Enabled = false;
-                timer.Enabled = true;
+                pingTimer.Enabled = true;
+                ipTimer.Enabled = true;
             }
         }
 
