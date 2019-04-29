@@ -18,6 +18,10 @@ namespace PingPoll
         private System.Net.NetworkInformation.PingReply reply;
         private string currentIP;
         private int interval;
+        private DateTime requestTime;
+        private DateTime responseTime;
+        private TimeSpan pingTimeSpan;
+        private string responseTimeString;
 
         public Form1()
         {
@@ -42,12 +46,23 @@ namespace PingPoll
 
             try
             {
+                requestTime = DateTime.Now;
                 reply = ping.Send(txtPingURL.Text);
+                responseTime = DateTime.Now;
+
+                pingTimeSpan = responseTime - requestTime;
+
+                if (pingTimeSpan.TotalSeconds > 60)
+                    responseTimeString = $"response received in {pingTimeSpan.Minutes} minute{(pingTimeSpan.Minutes != 1 ? "s" : "")} {pingTimeSpan.Seconds} second{(pingTimeSpan.Seconds != 1 ? "s" : "")}";
+                else if (pingTimeSpan.TotalMilliseconds > 1000)
+                    responseTimeString = $"response received in {pingTimeSpan.Seconds} second{(pingTimeSpan.Seconds != 1 ? "s" : "")}";
+                else
+                    responseTimeString = $"response received in {pingTimeSpan.Milliseconds} milliseconds";
 
                 if (reply.Status != System.Net.NetworkInformation.IPStatus.Success)
                     AddEventLog(dgvEvents, "Offline");
                 else
-                    AddEventLog(dgvEvents, "Online");
+                    AddEventLog(dgvEvents, $"Online ({responseTimeString})");
             }
             catch (Exception ex)
             {
