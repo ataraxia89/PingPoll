@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Net;
+using System.Text;
 using System.Windows.Forms;
 
 namespace PingPoll
@@ -216,10 +218,61 @@ namespace PingPoll
             dgvOffline.Rows.Clear();
         }
 
+        private void btnExportEvents_Click(object sender, EventArgs e)
+        {
+            if (dgvEvents.Rows.Count > 0)
+                ExportDataGridViewToCSV(dgvEvents, "EventLog.csv");
+            else
+                MessageBox.Show("No event data to export!");
+        }
+
+        private void btnExportDowntime_Click(object sender, EventArgs e)
+        {
+            if (dgvOffline.Rows.Count > 0)
+                ExportDataGridViewToCSV(dgvOffline, "DowntimeLog.csv");
+            else
+                MessageBox.Show("No downtime data to export!");
+        }
+
         private void dgv_Scroll(object sender, ScrollEventArgs e)
         {
             if (!codeRunning)
                 chkLiveScrolling.Checked = false;
+        }
+
+        private void ExportDataGridViewToCSV(DataGridView dgv, string defaultFileName = "")
+        {
+            SaveFileDialog saveFile = new SaveFileDialog();
+            saveFile.FileName = defaultFileName;
+            saveFile.Filter = "CSV file (*.csv)|*.csv";
+
+            if (saveFile.ShowDialog() == DialogResult.OK)
+            {
+                string delimiter = ",";
+
+                int columnCount = dgv.Columns.Count;
+
+                StringBuilder sb = new StringBuilder();
+
+                string[] columnHeaders = new string[columnCount];
+                for (int i = 0; i < columnCount; i++)
+                    columnHeaders[i] = dgv.Columns[i].HeaderText;
+
+                sb.AppendLine(string.Join(delimiter, columnHeaders));
+                
+                string[] rowData = new string[columnCount];
+                foreach (DataGridViewRow row in dgv.Rows)
+                {
+                    for (int i = 0; i < columnCount; i++)
+                        rowData[i] = row.Cells[i].Value.ToString();
+
+                    sb.AppendLine(string.Join(delimiter, rowData));
+                }
+
+                File.WriteAllText(saveFile.FileName, sb.ToString());
+
+                MessageBox.Show($"'{saveFile.FileName}' saved successfully");
+            }
         }
     }
 }

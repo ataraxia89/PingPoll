@@ -45,6 +45,8 @@
             this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EventType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EventDetails = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnExportEvents = new System.Windows.Forms.Button();
+            this.btnExportDowntime = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEvents)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOffline)).BeginInit();
             this.SuspendLayout();
@@ -220,11 +222,33 @@
             this.EventDetails.ReadOnly = true;
             this.EventDetails.Width = 95;
             // 
+            // btnExportEvents
+            // 
+            this.btnExportEvents.Location = new System.Drawing.Point(593, 344);
+            this.btnExportEvents.Name = "btnExportEvents";
+            this.btnExportEvents.Size = new System.Drawing.Size(159, 27);
+            this.btnExportEvents.TabIndex = 37;
+            this.btnExportEvents.Text = "Export Events to CSV";
+            this.btnExportEvents.UseVisualStyleBackColor = true;
+            this.btnExportEvents.Click += new System.EventHandler(this.btnExportEvents_Click);
+            // 
+            // btnExportDowntime
+            // 
+            this.btnExportDowntime.Location = new System.Drawing.Point(593, 377);
+            this.btnExportDowntime.Name = "btnExportDowntime";
+            this.btnExportDowntime.Size = new System.Drawing.Size(159, 27);
+            this.btnExportDowntime.TabIndex = 38;
+            this.btnExportDowntime.Text = "Export Downtime to CSV";
+            this.btnExportDowntime.UseVisualStyleBackColor = true;
+            this.btnExportDowntime.Click += new System.EventHandler(this.btnExportDowntime_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(795, 508);
+            this.Controls.Add(this.btnExportDowntime);
+            this.Controls.Add(this.btnExportEvents);
             this.Controls.Add(this.chkLiveScrolling);
             this.Controls.Add(this.dgvOffline);
             this.Controls.Add(this.lblPingInterval);
@@ -267,6 +291,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Time;
         private System.Windows.Forms.DataGridViewTextBoxColumn EventType;
         private System.Windows.Forms.DataGridViewTextBoxColumn EventDetails;
+        internal System.Windows.Forms.Button btnExportEvents;
+        internal System.Windows.Forms.Button btnExportDowntime;
     }
 }
 
