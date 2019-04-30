@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Drawing;
 using System.Net;
 using System.Windows.Forms;
@@ -19,6 +19,7 @@ namespace PingPoll
         private string responseTimeString;
         private DateTime? offlineTimestamp;
         private DateTime onlineTimestamp;
+        private bool codeRunning;
 
         public Form1()
         {
@@ -159,9 +160,15 @@ namespace PingPoll
             {
                 dgv.Rows.Add(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"), eventDetails);
 
-                dgv.ClearSelection();
-                dgv.Rows[dgv.Rows.Count - 1].Selected = true;
-                dgv.FirstDisplayedScrollingRowIndex = dgv.Rows.Count - 1;
+                if (chkLiveScrolling.Checked)
+                {
+                    codeRunning = true;
+                    dgv.ClearSelection();
+                    dgv.Rows[dgv.Rows.Count - 1].Selected = true;
+                    dgv.FirstDisplayedScrollingRowIndex = dgv.Rows.Count - 1;
+                    codeRunning = false;
+                }
+                
                 Update();
             }
         }
@@ -177,9 +184,15 @@ namespace PingPoll
                 TimeSpan duration = timeOnline - timeOffline;
                 dgv.Rows.Add(timeOffline.ToString("yyyy-MM-dd HH:mm:ss.fff"), timeOnline.ToString("yyyy-MM-dd HH:mm:ss.fff"), $"{(duration.Hours > 0 ? duration.TotalHours : 0).ToString("00")}:{duration.Minutes.ToString("00")}:{duration.Seconds.ToString("00")}.{duration.Milliseconds.ToString("000")}");
 
-                dgv.ClearSelection();
-                dgv.Rows[dgv.Rows.Count - 1].Selected = true;
-                dgv.FirstDisplayedScrollingRowIndex = dgv.Rows.Count - 1;
+                if (chkLiveScrolling.Checked)
+                {
+                    codeRunning = true;
+                    dgv.ClearSelection();
+                    dgv.Rows[dgv.Rows.Count - 1].Selected = true;
+                    dgv.FirstDisplayedScrollingRowIndex = dgv.Rows.Count - 1;
+                    codeRunning = false;
+                }
+
                 Update();
             }
         }
@@ -201,6 +214,12 @@ namespace PingPoll
         {
             dgvEvents.Rows.Clear();
             dgvOffline.Rows.Clear();
+        }
+
+        private void dgv_Scroll(object sender, ScrollEventArgs e)
+        {
+            if (!codeRunning)
+                chkLiveScrolling.Checked = false;
         }
     }
 }

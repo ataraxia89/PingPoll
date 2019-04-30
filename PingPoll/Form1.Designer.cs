@@ -1,4 +1,4 @@
-namespace PingPoll
+﻿namespace PingPoll
 {
     partial class Form1
     {
@@ -43,6 +43,7 @@ namespace PingPoll
             this.Offline = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Online = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Duration = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chkLiveScrolling = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEvents)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOffline)).BeginInit();
             this.SuspendLayout();
@@ -52,7 +53,7 @@ namespace PingPoll
             this.btnStartStop.BackColor = System.Drawing.Color.Green;
             this.btnStartStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStartStop.ForeColor = System.Drawing.Color.White;
-            this.btnStartStop.Location = new System.Drawing.Point(557, 206);
+            this.btnStartStop.Location = new System.Drawing.Point(557, 279);
             this.btnStartStop.Name = "btnStartStop";
             this.btnStartStop.Size = new System.Drawing.Size(231, 49);
             this.btnStartStop.TabIndex = 25;
@@ -85,6 +86,7 @@ namespace PingPoll
             this.dgvEvents.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvEvents.Size = new System.Drawing.Size(539, 243);
             this.dgvEvents.TabIndex = 27;
+            this.dgvEvents.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dgv_Scroll);
             // 
             // Time
             // 
@@ -141,7 +143,7 @@ namespace PingPoll
             // 
             // lblPingInterval
             // 
-            this.lblPingInterval.Location = new System.Drawing.Point(557, 103);
+            this.lblPingInterval.Location = new System.Drawing.Point(557, 176);
             this.lblPingInterval.Name = "lblPingInterval";
             this.lblPingInterval.Size = new System.Drawing.Size(231, 19);
             this.lblPingInterval.TabIndex = 34;
@@ -150,7 +152,7 @@ namespace PingPoll
             // 
             // txtPingInterval
             // 
-            this.txtPingInterval.Location = new System.Drawing.Point(557, 125);
+            this.txtPingInterval.Location = new System.Drawing.Point(557, 198);
             this.txtPingInterval.Name = "txtPingInterval";
             this.txtPingInterval.Size = new System.Drawing.Size(231, 20);
             this.txtPingInterval.TabIndex = 33;
@@ -172,6 +174,7 @@ namespace PingPoll
             this.dgvOffline.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvOffline.Size = new System.Drawing.Size(539, 205);
             this.dgvOffline.TabIndex = 35;
+            this.dgvOffline.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dgv_Scroll);
             // 
             // Offline
             // 
@@ -195,11 +198,24 @@ namespace PingPoll
             this.Duration.Name = "Duration";
             this.Duration.ReadOnly = true;
             // 
+            // chkLiveScrolling
+            // 
+            this.chkLiveScrolling.AutoSize = true;
+            this.chkLiveScrolling.Checked = true;
+            this.chkLiveScrolling.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkLiveScrolling.Location = new System.Drawing.Point(628, 146);
+            this.chkLiveScrolling.Name = "chkLiveScrolling";
+            this.chkLiveScrolling.Size = new System.Drawing.Size(89, 17);
+            this.chkLiveScrolling.TabIndex = 36;
+            this.chkLiveScrolling.Text = "Live Scrolling";
+            this.chkLiveScrolling.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(795, 508);
+            this.Controls.Add(this.chkLiveScrolling);
             this.Controls.Add(this.dgvOffline);
             this.Controls.Add(this.lblPingInterval);
             this.Controls.Add(this.txtPingInterval);
@@ -239,6 +255,7 @@ namespace PingPoll
         private System.Windows.Forms.DataGridViewTextBoxColumn Offline;
         private System.Windows.Forms.DataGridViewTextBoxColumn Online;
         private System.Windows.Forms.DataGridViewTextBoxColumn Duration;
+        private System.Windows.Forms.CheckBox chkLiveScrolling;
     }
 }
 
