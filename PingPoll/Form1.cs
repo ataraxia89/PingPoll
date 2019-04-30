@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Net;
 using System.Windows.Forms;
@@ -41,14 +41,14 @@ namespace PingPoll
         {
             pingTimer.Enabled = false;
 
-            if (txtPingURL.Text.Contains("http://"))
-                txtPingURL.Text = txtPingURL.Text.Replace("http://", "");
+            if (txtPingIPURL.Text.Contains("http://"))
+                txtPingIPURL.Text = txtPingIPURL.Text.Replace("http://", "");
 
             try
             {
                 requestTime = DateTime.Now;
                 pingSuccess = false;
-                try { pingSuccess = ping.Send(txtPingURL.Text).Status == System.Net.NetworkInformation.IPStatus.Success; }
+                try { pingSuccess = ping.Send(txtPingIPURL.Text).Status == System.Net.NetworkInformation.IPStatus.Success; }
                 catch { }
 
                 responseTime = DateTime.Now;
@@ -136,14 +136,14 @@ namespace PingPoll
                 btnStartStop.Text = "Start";
                 btnStartStop.BackColor = Color.Green;
                 txtPingInterval.Enabled = true;
-                txtPingURL.Enabled = true;
+                txtPingIPURL.Enabled = true;
             }
             else
             {
                 btnStartStop.Text = "Stop";
                 btnStartStop.BackColor = Color.Red;
                 txtPingInterval.Enabled = false;
-                txtPingURL.Enabled = false;
+                txtPingIPURL.Enabled = false;
                 pingTimer.Enabled = true;
                 ipTimer.Enabled = true;
             }

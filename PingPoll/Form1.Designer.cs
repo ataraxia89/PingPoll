@@ -1,4 +1,4 @@
-﻿namespace PingPoll
+namespace PingPoll
 {
     partial class Form1
     {
@@ -33,8 +33,8 @@
             this.dgvEvents = new System.Windows.Forms.DataGridView();
             this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EventDetails = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtPingURL = new System.Windows.Forms.TextBox();
-            this.lblPingURL = new System.Windows.Forms.Label();
+            this.txtPingIPURL = new System.Windows.Forms.TextBox();
+            this.lblPingIPURL = new System.Windows.Forms.Label();
             this.lblCurrentIPTitle = new System.Windows.Forms.Label();
             this.lblCurrentIP = new System.Windows.Forms.Label();
             this.lblPingInterval = new System.Windows.Forms.Label();
@@ -102,22 +102,22 @@
             this.EventDetails.ReadOnly = true;
             this.EventDetails.Width = 95;
             // 
-            // txtPingURL
+            // txtPingIPURL
             // 
-            this.txtPingURL.Location = new System.Drawing.Point(557, 170);
-            this.txtPingURL.Name = "txtPingURL";
-            this.txtPingURL.Size = new System.Drawing.Size(231, 20);
-            this.txtPingURL.TabIndex = 28;
-            this.txtPingURL.Text = "www.google.com";
+            this.txtPingIPURL.Location = new System.Drawing.Point(557, 243);
+            this.txtPingIPURL.Name = "txtPingIPURL";
+            this.txtPingIPURL.Size = new System.Drawing.Size(231, 20);
+            this.txtPingIPURL.TabIndex = 28;
+            this.txtPingIPURL.Text = "8.8.8.8";
             // 
-            // lblPingURL
+            // lblPingIPURL
             // 
-            this.lblPingURL.Location = new System.Drawing.Point(557, 148);
-            this.lblPingURL.Name = "lblPingURL";
-            this.lblPingURL.Size = new System.Drawing.Size(231, 19);
-            this.lblPingURL.TabIndex = 30;
-            this.lblPingURL.Text = "Ping URL:";
-            this.lblPingURL.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblPingIPURL.Location = new System.Drawing.Point(557, 221);
+            this.lblPingIPURL.Name = "lblPingIPURL";
+            this.lblPingIPURL.Size = new System.Drawing.Size(231, 19);
+            this.lblPingIPURL.TabIndex = 30;
+            this.lblPingIPURL.Text = "Ping IP/URL:";
+            this.lblPingIPURL.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblCurrentIPTitle
             // 
@@ -205,8 +205,8 @@
             this.Controls.Add(this.txtPingInterval);
             this.Controls.Add(this.lblCurrentIP);
             this.Controls.Add(this.lblCurrentIPTitle);
-            this.Controls.Add(this.lblPingURL);
-            this.Controls.Add(this.txtPingURL);
+            this.Controls.Add(this.lblPingIPURL);
+            this.Controls.Add(this.txtPingIPURL);
             this.Controls.Add(this.dgvEvents);
             this.Controls.Add(this.btnStartStop);
             this.Controls.Add(this.btnClear);
@@ -227,8 +227,8 @@
         internal System.Windows.Forms.Button btnStartStop;
         internal System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.DataGridView dgvEvents;
-        private System.Windows.Forms.TextBox txtPingURL;
-        private System.Windows.Forms.Label lblPingURL;
+        private System.Windows.Forms.TextBox txtPingIPURL;
+        private System.Windows.Forms.Label lblPingIPURL;
         private System.Windows.Forms.DataGridViewTextBoxColumn Time;
         private System.Windows.Forms.DataGridViewTextBoxColumn EventDetails;
         private System.Windows.Forms.Label lblCurrentIPTitle;
