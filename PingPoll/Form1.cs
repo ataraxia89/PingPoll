@@ -68,7 +68,7 @@ namespace PingPoll
                     if (offlineTimestamp == null)
                         offlineTimestamp = DateTime.Now;
 
-                    AddEventLog(dgvEvents, "Offline");
+                    AddEventLog(dgvEvents, "Ping Test", "Offline");
                 }
                 else
                 {
@@ -79,12 +79,12 @@ namespace PingPoll
                         offlineTimestamp = null;
                     }
 
-                    AddEventLog(dgvEvents, $"Online ({responseTimeString})");
+                    AddEventLog(dgvEvents, "Ping Test", $"Online ({responseTimeString})");
                 }
             }
             catch (Exception ex)
             {
-                AddEventLog(dgvEvents, $"Error attempting ping: {ex.Message}");
+                AddEventLog(dgvEvents, "Ping Error", $"Error attempting ping: {ex.Message}");
             }
 
             pingTimer.Enabled = true;
@@ -105,18 +105,18 @@ namespace PingPoll
 
                 if (currentIP == null)
                 {
-                    AddEventLog(dgvEvents, $"IP address set as {newIP}");
+                    AddEventLog(dgvEvents, "IP Check", $"IP address set as {newIP}");
                     currentIP = newIP;
                 }
                 else if (newIP != currentIP)
                 {
-                    AddEventLog(dgvEvents, $"IP address changed from {currentIP} to {newIP}");
+                    AddEventLog(dgvEvents, "IP Check", $"IP address changed from {currentIP} to {newIP}");
                     currentIP = newIP;
                 }
             }
             catch (Exception ex)
             {
-                AddEventLog(dgvEvents, $"Error attempting IP check: {ex.Message}");
+                AddEventLog(dgvEvents, "IP Check Error", $"Error attempting IP check: {ex.Message}");
             }
 
             ipTimer.Enabled = true;
@@ -150,15 +150,15 @@ namespace PingPoll
             }
         }
 
-        private delegate void AddEventLogDelegate(DataGridView dgv, string eventDetails);
+        private delegate void AddEventLogDelegate(DataGridView dgv, string eventType, string eventDetails);
 
-        private void AddEventLog(DataGridView dgv, string eventDetails)
+        private void AddEventLog(DataGridView dgv, string eventType, string eventDetails)
         {
             if (dgv.InvokeRequired)
-                dgv.Invoke(new AddEventLogDelegate(AddEventLog), dgv, eventDetails);
+                dgv.Invoke(new AddEventLogDelegate(AddEventLog), dgv, eventType, eventDetails);
             else
             {
-                dgv.Rows.Add(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"), eventDetails);
+                dgv.Rows.Add(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"), eventType, eventDetails);
 
                 if (chkLiveScrolling.Checked)
                 {

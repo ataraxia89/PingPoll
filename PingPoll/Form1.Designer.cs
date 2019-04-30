@@ -31,8 +31,6 @@
             this.btnStartStop = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.dgvEvents = new System.Windows.Forms.DataGridView();
-            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EventDetails = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtPingIPURL = new System.Windows.Forms.TextBox();
             this.lblPingIPURL = new System.Windows.Forms.Label();
             this.lblCurrentIPTitle = new System.Windows.Forms.Label();
@@ -44,6 +42,9 @@
             this.Online = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Duration = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chkLiveScrolling = new System.Windows.Forms.CheckBox();
+            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EventType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EventDetails = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEvents)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOffline)).BeginInit();
             this.SuspendLayout();
@@ -78,6 +79,7 @@
             this.dgvEvents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvEvents.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Time,
+            this.EventType,
             this.EventDetails});
             this.dgvEvents.Location = new System.Drawing.Point(12, 12);
             this.dgvEvents.Name = "dgvEvents";
@@ -87,22 +89,6 @@
             this.dgvEvents.Size = new System.Drawing.Size(539, 243);
             this.dgvEvents.TabIndex = 27;
             this.dgvEvents.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dgv_Scroll);
-            // 
-            // Time
-            // 
-            this.Time.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Time.HeaderText = "Time";
-            this.Time.Name = "Time";
-            this.Time.ReadOnly = true;
-            this.Time.Width = 55;
-            // 
-            // EventDetails
-            // 
-            this.EventDetails.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.EventDetails.HeaderText = "Event Details";
-            this.EventDetails.Name = "EventDetails";
-            this.EventDetails.ReadOnly = true;
-            this.EventDetails.Width = 95;
             // 
             // txtPingIPURL
             // 
@@ -210,6 +196,30 @@
             this.chkLiveScrolling.Text = "Live Scrolling";
             this.chkLiveScrolling.UseVisualStyleBackColor = true;
             // 
+            // Time
+            // 
+            this.Time.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Time.HeaderText = "Time";
+            this.Time.Name = "Time";
+            this.Time.ReadOnly = true;
+            this.Time.Width = 55;
+            // 
+            // EventType
+            // 
+            this.EventType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.EventType.HeaderText = "Event Type";
+            this.EventType.Name = "EventType";
+            this.EventType.ReadOnly = true;
+            this.EventType.Width = 87;
+            // 
+            // EventDetails
+            // 
+            this.EventDetails.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.EventDetails.HeaderText = "Event Details";
+            this.EventDetails.Name = "EventDetails";
+            this.EventDetails.ReadOnly = true;
+            this.EventDetails.Width = 95;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -245,8 +255,6 @@
         private System.Windows.Forms.DataGridView dgvEvents;
         private System.Windows.Forms.TextBox txtPingIPURL;
         private System.Windows.Forms.Label lblPingIPURL;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Time;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EventDetails;
         private System.Windows.Forms.Label lblCurrentIPTitle;
         private System.Windows.Forms.Label lblCurrentIP;
         private System.Windows.Forms.Label lblPingInterval;
@@ -256,6 +264,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Online;
         private System.Windows.Forms.DataGridViewTextBoxColumn Duration;
         private System.Windows.Forms.CheckBox chkLiveScrolling;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Time;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EventType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EventDetails;
     }
 }
 
